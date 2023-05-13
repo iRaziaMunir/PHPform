@@ -25,7 +25,7 @@
 <body>
 <?php 
 // define   variables and set to empty values
-$FnameErr = $LnameEr = $emailErr = $genderErr = $passwordErr  = "" ;
+$FnameErr = $LnameErr = $emailErr = $genderErr = $passwordErr = $websiteErr  = "" ;
 $Fname = $Lname = $email = $gender = $comment = $website = $password = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   //check if last name is empty
   if (empty($_POST["lastname"])) {
-    $LnameEr = "Last Name is required";
+    $LnameErr = "Last Name is required";
   } else {
     $Lname = test_input($_POST["lastname"]);
   }
@@ -67,6 +67,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $websiter =  " ";
   } else { 
     $website = test_input($_POST["website"]);
+       // check if URL address syntax is valid (this regular expression also allows dashes in the URL)
+       if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
+        $websiteErr = "invalid URL";
+       }
   }
 
   //check if gender  is empty
@@ -104,17 +108,17 @@ function test_input($data) {
     </div>
     <div class="col-6">
         First name:<br>
-        <input type="text" name="firstname" value="Razia"><span class="error"> <span>*</span>
+        <input type="text" name="firstname" value=" <?php echo $Fname;?>"><span class="error"> <span>*</span>
         <?php echo $FnameErr;?></span><br><br>
     </div>
     <di class="col-6">
     Last name:<br>
-        <input type="text" name="lastname" value="Munir">
-        <span class="error">* <?php echo $LnameEr;?></span><br><br>
+        <input type="text" name="lastname" value="<?php echo $Lname; ?>">
+        <span class="error">* <?php echo $LnameErr;?></span><br><br>
     </di>
     <di class="col-6">
         Email:<br>
-        <input type="email" name="email" id="email">
+        <input type="text" name="email" id="email" value = "<?php echo $email; ?>">
         <span class="error">* <?php echo $emailErr;?></span> <br><br>
     </di>
     <di class="col-6">
@@ -124,7 +128,8 @@ function test_input($data) {
     </di>
     <di class="col-6">
         Website:<br>
-        <input type="text" name="website" id="website"><br>
+        <input type="text" name="website" id="website">
+        <?php echo $websiteErr ;?></span><br>
     </di>
     <di class="col-6">
     Gender: <span class="error">* <?php echo $genderErr ;?></span><br>
