@@ -8,7 +8,10 @@
   <title>Document</title>
   <style>
   body{
-  background-color: rgb(102,153,1530);
+  background-color: rgb(51,153,153);
+  }
+  h1{
+    font-size:3rem;
   }
   .error{
     color:red;
@@ -19,13 +22,12 @@
   form input,textarea{
   padding: 6px 8px;
   background-color:rgb(204,204,204);
-  }
-  .gender{
-    padding: 6px 8px;
-    background-color:rgb(204,204,204);
+  border:none;
   }
   .submit-btn{
     width:200px;
+    font-weight:bold;
+    border:none;
   }
 
 </style>
