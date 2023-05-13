@@ -1,0 +1,150 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <title>Document</title>
+  <style>
+  body{
+  background-color: rgb(204,204,255);
+  }
+  form{
+  font-weight: bold;
+  }
+  form input{
+  padding: 6px 8px;
+  color: 0;
+  }
+
+</style>
+</head>
+
+<html>
+<body>
+<?php 
+// define   variables and set to empty values
+$FnameErr = $LnameEr = $emailErr = $genderErr = $passwordErr  = "" ;
+$Fname = $Lname = $email = $gender = $comment = $website = $password = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  //check if first name is empty
+  if (empty($_POST["firstname"])) {
+    $FnameErr = "First Name is required";
+  } else {
+    $Fname = test_input($_POST["firstname"]);
+    // check if First name contains only letters and whitespaces
+    if(!preg_match ("/^[a-zA-Z]*$/" ,$Fname)){
+      $FnameErr = "Only letters and whitespaces are allowed";
+    }
+  }
+  //check if last name is empty
+  if (empty($_POST["lastname"])) {
+    $LnameEr = "Last Name is required";
+  } else {
+    $Lname = test_input($_POST["lastname"]);
+  }
+  //check if email  is empty
+  if (empty($_POST["email"])) {
+    $emailErr =  "Email is required";
+  } else { 
+    $email = test_input($_POST["email"]);
+    // check if e-mail address is well-formed
+    if (!filter_var( $email, FILTER_VALIDATE_EMAIL)) {
+      $emailErr = "Invalid email format";
+    }
+  }
+ //check if password  is empty
+  if (empty($_POST["password"])) {
+    $passwordErr =  "password is required";
+  } else { 
+    $password = test_input($_POST["password"]);
+  }
+  //check if $website   is empty
+  
+  if (empty($_POST["website"])) {
+    $websiter =  " ";
+  } else { 
+    $website = test_input($_POST["website"]);
+  }
+
+  //check if gender  is empty
+  
+  if (empty($_POST["gender"])) {
+    $genderErr =  "gender is required";
+  } else { 
+    $gender = test_input($_POST["gender"]);
+  }
+  
+  //check if comment   is empty
+  if (empty($_POST["comment"])) {
+    $comment =  " ";
+  } else { 
+    $comment = test_input($_POST["comment"]);
+  }
+  
+}
+function test_input($data) {
+  $data = trim($data);
+  $data = stripslashes($data);
+  $data = htmlspecialchars($data);
+  return $data;
+}
+?>
+
+
+
+
+<!-- form -->
+<div class="container">
+    <form class="row"  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method = "POST">
+    <div class="text-center col-12">
+        <h1> Personal Information:</h1>
+    </div>
+    <div class="col-6">
+        First name:<br>
+        <input type="text" name="firstname" value="Razia"><span class="error"> <span>*</span>
+        <?php echo $FnameErr;?></span><br><br>
+    </div>
+    <di class="col-6">
+    Last name:<br>
+        <input type="text" name="lastname" value="Munir">
+        <span class="error">* <?php echo $LnameEr;?></span><br><br>
+    </di>
+    <di class="col-6">
+        Email:<br>
+        <input type="email" name="email" id="email">
+        <span class="error">* <?php echo $emailErr;?></span> <br><br>
+    </di>
+    <di class="col-6">
+    Password:<br>
+        <input type="password" name="password" id="password">
+        <span class="error">* <?php echo $passwordErr ;?></span><br><br><br>
+    </di>
+    <di class="col-6">
+        Website:<br>
+        <input type="text" name="website" id="website"><br>
+    </di>
+    <di class="col-6">
+    Gender: <span class="error">* <?php echo $genderErr ;?></span><br>
+    <input type="radio" name="gender" value="female">Female<br>
+    <input type="radio" name="gender" value="male">Male<br>
+    <input type="radio" name="gender" value="other">Other <br>
+    </di>
+    <di class="col-12">
+    Comment:<br>
+     <textarea name="comment" rows="5" cols="40"></textarea>
+    </di>
+    <di class="col-6 ">
+    <br>
+    <input type="submit" value="Submit">
+    </di>
+    
+</form>
+</div>
+</div>
+</body>
+</html>
+
+
