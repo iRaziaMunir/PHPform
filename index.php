@@ -8,14 +8,14 @@
   <title>Document</title>
   <style>
   body{
-  background-color: rgb(204,204,255);
+  background-color: rgb(102,153,1530);
   }
   form{
   font-weight: bold;
   }
   form input{
   padding: 6px 8px;
-  color: 0;
+  background-color:rgb(204,204,204);
   }
 
 </style>
@@ -123,16 +123,16 @@ function test_input($data) {
     </di>
     <di class="col-6">
     Password:<br>
-        <input type="password" name="password" id="password">
+        <input type="password" name="password" id="password" value = "<?php echo $password; ?>"> 
         <span class="error">* <?php echo $passwordErr ;?></span><br><br><br>
     </di>
     <di class="col-6">
         Website:<br>
-        <input type="text" name="website" id="website">
+        <input type="text" name="website" id="website" value = " <?php echo $website ;?>">
         <?php echo $websiteErr ;?></span><br>
     </di>
     <di class="col-6">
-    Gender: <span class="error">* <?php echo $genderErr ;?></span><br>
+    Gender: <span class="error">* <?php echo $genderErr ;?></span><br><br>
     <input type="radio" name="gender" value="female">Female<br>
     <input type="radio" name="gender" value="male">Male<br>
     <input type="radio" name="gender" value="other">Other <br>
