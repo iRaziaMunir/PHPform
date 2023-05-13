@@ -10,12 +10,22 @@
   body{
   background-color: rgb(102,153,1530);
   }
+  .error{
+    color:red;
+  }
   form{
   font-weight: bold;
   }
-  form input{
+  form input,textarea{
   padding: 6px 8px;
   background-color:rgb(204,204,204);
+  }
+  .gender{
+    padding: 6px 8px;
+    background-color:rgb(204,204,204);
+  }
+  .submit-btn{
+    width:200px;
   }
 
 </style>
@@ -108,7 +118,7 @@ function test_input($data) {
     </div>
     <div class="col-6">
         First name:<br>
-        <input type="text" name="firstname" value=" <?php echo $Fname;?>"><span class="error"> <span>*</span>
+        <input type="text" name="firstname" value=" <?php echo $Fname;?>"><span class="error">*
         <?php echo $FnameErr;?></span><br><br>
     </div>
     <di class="col-6">
@@ -129,21 +139,21 @@ function test_input($data) {
     <di class="col-6">
         Website:<br>
         <input type="text" name="website" id="website" value = " <?php echo $website ;?>">
-        <?php echo $websiteErr ;?></span><br>
+        <span class="error"><?php echo $websiteErr ;?></span><br>
     </di>
     <di class="col-6">
     Gender: <span class="error">* <?php echo $genderErr ;?></span><br><br>
-    <input type="radio" name="gender" value="female">Female<br>
-    <input type="radio" name="gender" value="male">Male<br>
-    <input type="radio" name="gender" value="other">Other <br>
+    <input type="radio" name="gender" <?php if (isset($gender) && $gender=="female") echo "checked";?>  value="female" class = "gender">Female<br>
+    <input type="radio" name="gender" <?php if (isset($gender)&& $gender == "male") echo "checked"; ?>  value="male" class = "gender">Male<br>
+    <input type="radio" name="gender" <?php if (isset($gender)&& $gender == "other") echo "checked"; ?> value="other" class = "gender">Other <br>
     </di>
     <di class="col-12">
     Comment:<br>
-     <textarea name="comment" rows="5" cols="40"></textarea>
+     <textarea name="comment" rows="5" cols="40" ><?php echo $comment ; ?></textarea>
     </di>
     <di class="col-6 ">
     <br>
-    <input type="submit" value="Submit">
+    <input type="submit" value="Submit" class = "submit-btn">
     </di>
     
 </form>
